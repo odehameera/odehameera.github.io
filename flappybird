@@ -1,0 +1,218 @@
+/* My City Bird Game
+ * Author: Ameera Odeh
+ * Date: 12/10/2019
+ * Language:  Processing (Version of Java)
+ * Download: https://processing.org/download/
+ */
+
+PImage citybg, icon, topPipe, bottomPipe;
+int citybgX, citybgY, iX, iY, g, ViY ;
+int[] pipeX, pipeY; //DECLARE 2 ARRAYS
+int gameState, score, highScore;
+
+//Once Only
+void setup()
+{
+  size(960,500);
+  
+  citybg = loadImage("./img/citybg.png");
+  
+  icon = loadImage("./img/icon.png");
+  
+  topPipe = loadImage("./img/topPipe.png");
+  
+  bottomPipe = loadImage("./img/bottomPipe.png");
+  
+  iX=100;
+  
+  iY=50;
+  
+  g=1;//gravity on icon
+  
+  pipeX=new int[4]; //[0,0,0,0,0] array
+
+  pipeY=new int[pipeX.length]; 
+  
+      //POPULATE W VALUES
+  for(int i = 0; i  < pipeX.length; i++)
+  {
+    pipeX[i]=width + 500*i;
+    pipeY[i]=(int)random(-350,0);
+  }
+  gameState=-1;
+}
+
+// Main Game Loop
+void draw()
+{
+  if(gameState == -1)
+  {
+    startScreen();
+  }
+  else if(gameState==0)
+  {
+    setCitybg();
+    
+    setPipes();
+    
+    icon();
+    
+    displayScore();
+  }
+  else
+  {
+    endScreen();
+    
+    restart();
+  }
+}
+
+void endScreen()
+{
+ fill(150,150,250,100);
+ 
+ if(mouseX > 90 && mouseX < 595 && mouseY > 150 && mouseY < 290)
+    {
+      fill(150, 250, 150, 100);
+    }
+    rect(90, 150, 505, 140, 5);
+    
+    fill(0);
+    
+    textSize(40); 
+    
+    text("You died :(", 200,200);
+    
+    text("Click HERE to play again." , 100, 270); 
+}
+
+void restart()
+{
+   if(mouseX > 90 && mouseX < 595 && mouseY > 150 && mouseY < 290)
+   {
+     //RESET AND RESTART 
+     if(mousePressed)
+     {
+        iY = height/2;
+        
+        for(int i = 0; i < pipeX.length; i++)
+        {
+          pipeX[i] = width + 200*i;
+          pipeY[i] = (int)random(-350, 0);
+        }      
+        score = 0;
+        
+        gameState = 0;  
+     } 
+   }
+}
+
+void startScreen()
+{
+  image(citybg, 0,0);
+  
+  textSize(50);
+  
+  fill(0,0,0);
+  
+  text("Welcome to City Bird!", 220, 100);
+  
+  fill(255,0,0);
+  
+  text("Click your mouse to start!", 180, 350);
+  
+  if(mousePressed)
+  {
+    iY = height/2;
+    gameState = 0;
+  }
+}
+
+
+void displayScore()
+{
+  if(score>highScore)
+  {
+    highScore = score;
+  }
+  //Background for ScoreBoard
+  fill(255,0,0, 200);
+  
+  rect(width-175, 10, 155, 80, 5);
+  
+  fill(0);
+  
+  textSize(32);
+  
+  text("Score: " + score, width - 170, 40);  
+  
+  text("Best:  " + highScore, width - 170, 80);   
+}
+
+
+//Create The Pipes
+void setPipes()
+{
+  for(int i = 0; i  < pipeX.length; i++)
+    {
+      image(topPipe, pipeX[i], pipeY[i]);
+      
+      image(bottomPipe, pipeX[i], pipeY[i]+500);
+      
+      pipeX[i]-= 5;
+      
+      if(pipeX[i]<-300)
+        {
+          pipeX[i]=width;
+        }
+      if(iX > (pipeX[i]-45) && iX < pipeX[i] + 92)
+        {
+          if(!(iY > pipeY[i]+350 && iY< pipeY[i] + (350 + 150-45)))
+            { 
+              gameState=1;
+            }
+            else if (iX==pipeX[i] || iX == pipeX[i] + 1)
+            {
+              score++;
+            }
+        }
+    }
+}
+
+void icon()
+{
+  image(icon,iX,iY);
+  
+  iY=iY+ViY;
+  
+  ViY=ViY+g;
+  
+  if(iY > height || iY < 0)
+  {
+    text( "You Fell Off the Screen!", 250,60);
+    
+    gameState=1;
+  }
+}
+
+
+void mousePressed()
+{
+  ViY=-10; // negative goes up
+}
+
+
+//Background Setup
+void setCitybg()
+{
+  image(citybg,citybgX,citybgY);  
+  
+  image(citybg,citybgX+citybg.width,citybgY); 
+
+  citybgX=citybgX-2; //controls the speed of the scrolling
+ 
+  if(citybgX<-citybg.width)
+    {
+      citybgX=0; //allows for the background to loop 
+    }
+}
