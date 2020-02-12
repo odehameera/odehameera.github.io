@@ -1,0 +1,153 @@
+body{ 
+    font:  20px/2.0 Courier;
+    padding:0;
+    margin:0;
+    background-color: #e7d3d3;
+}
+/*global*/
+.container{
+    width:80%;
+    margin:auto;
+    overflow:hidden;
+}
+
+ul{
+    margin:0;
+    padding:0;
+}
+
+/*header*/
+header{
+    background:#dec3c3;
+    color:#000000;
+    padding-top:30px;
+    min-height:70px;
+    border-bottom: #000000 5px solid;
+}
+
+header a{
+    color:#000000 ;
+    text-decoration:none;
+    text-transform: uppercase;
+    font-size:20px;
+}
+
+
+header li{
+    float:left;
+    display:inline;
+    padding: 0 90px 0 90px;
+}
+
+header #branding{
+    float:left;
+}
+
+header #branding h1{
+    margin:0;
+}
+
+header nav{
+    float:right;
+    margin-top:10px;
+}
+
+header .highlight, header .current a{
+    color: #00000;
+    font-weight: bold;
+}
+
+header a:hover{
+    color: #e7d3d3
+    font-weight: bold;
+}
+
+/*showcase*/
+#showcase{
+    min-height:400px;
+    background-image: url('https://codehs.com/uploads/1ed6e616797a9fdb6f90d8ad9628e57e');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    text-align:center;
+    color:#000000;
+}
+
+#showcase h3{
+    margin-top:75px;
+    font-size:55px;
+    margin-bottom:10px;
+}
+
+#showcase p{
+    font-size: 25x;
+    text-shadow: 1px 1px 2px pink;
+    
+}
+
+#Newsletter{
+    padding:15px;
+    color:#e7d3d3;
+    background: #f9f4f4;
+}
+
+#Newsletter h3{
+    float:left;
+}
+
+#Newsletter form{
+    float:right;
+    margin-top:15px;
+}
+
+#Newsletter input[type="email"]{
+    padding:4px;
+    height:25px;
+    width:250px;
+}
+
+/* Boxes*/
+#boxes{
+    margin-top:20px;
+}
+
+#boxes .box{
+    float:left;
+    text-align:center;
+    width:30%;
+    padding:10px;
+}
+
+#boxes .box imgs{
+    width:50%;
+    height:20%;
+}
+
+
+aside#sidebar{
+    width:30%;
+    margin-top:10px;
+}
+
+
+article#maincol{
+    float:left;
+    width:65%;
+    font-size:20px;
+}
+
+
+ul#portfolio li{
+    list-style: none;
+    padding:20px;
+    border:  #000000 solid 5px;
+    margin-bottom:5px;
+    background: #f9f4f4;
+}
+
+footer{
+    padding:30px;
+    margin-top:10px;
+    color:#000000;
+    background-color:  #dec3c3;
+    text-align:center;
+}
